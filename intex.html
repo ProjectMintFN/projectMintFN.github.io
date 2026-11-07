@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111016">
+<title>MINT FN — Return to Chapter 3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700;800;900;1000&family=Russo+One&display=swap');
+:root{
+  --purple:#a99aff;--yellow:#f1ff38;--white:#f7f6fb;--muted:#d0ccd9;
+  --panel:rgba(19,17,26,.84);--line:rgba(255,255,255,.13);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:#111016;color:var(--white);font-family:'Nunito Sans',Arial,sans-serif;overflow-x:hidden}
+body.light{background:#eeeaf5;color:#211b2b;--white:#211b2b;--muted:#5e5869;--panel:rgba(255,255,255,.88);--line:rgba(35,25,55,.14)}
+a{color:inherit;text-decoration:none}
+.hero{
+  min-height:100vh;position:relative;display:flex;flex-direction:column;isolation:isolate;
+  background:
+   linear-gradient(180deg,rgba(14,13,18,.70) 0%,rgba(14,13,18,.52) 42%,rgba(14,13,18,.88) 100%),
+   radial-gradient(ellipse at 17% 35%,rgba(30,107,89,.55),transparent 38%),
+   radial-gradient(ellipse at 84% 37%,rgba(118,47,55,.45),transparent 38%),
+   linear-gradient(115deg,#30362c 0%,#3b3031 48%,#211b2c 100%);
+  overflow:hidden;
+}
+.hero:before{
+ content:"";position:absolute;inset:-35px;z-index:-1;
+ background:
+  radial-gradient(ellipse at 20% 40%,rgba(85,143,112,.35),transparent 27%),
+  radial-gradient(ellipse at 76% 35%,rgba(174,71,71,.3),transparent 30%),
+  radial-gradient(ellipse at 54% 78%,rgba(25,25,40,.8),transparent 38%);
+ filter:blur(24px);transform:scale(1.08);
+ animation:backgroundDrift 18s ease-in-out infinite alternate;
+}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;opacity:.16;background-image:radial-gradient(rgba(255,255,255,.5) .7px,transparent .8px);background-size:5px 5px;mix-blend-mode:soft-light}
+@keyframes backgroundDrift{to{transform:scale(1.15) translate3d(-1%,1%,0)}}
+header{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,3vw,48px);position:relative;z-index:5;background:rgba(18,17,22,.18);backdrop-filter:blur(13px);border-bottom:1px solid rgba(255,255,255,.045)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Russo One',sans-serif;font-size:19px;letter-spacing:.04em}
+.logo-mark{width:35px;height:35px;display:grid;place-items:center;border:2px solid rgba(255,255,255,.9);border-radius:10px 10px 13px 5px;transform:rotate(-8deg);font-family:'Russo One';font-size:18px}
+nav{display:flex;align-items:center;gap:clamp(18px,3vw,42px)}
+nav a{font-size:14px;font-weight:800;color:#d4d0dc;transition:color .2s,transform .2s}
+nav a:hover{color:white;transform:translateY(-2px)}
+.header-right{display:flex;align-items:center;gap:12px}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:white;cursor:pointer;font-size:17px;transition:.25s}
+.theme:hover{transform:rotate(25deg);background:rgba(255,255,255,.2)}
+.download{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:30px;background:#afa0ff;color:#171323;font-size:14px;font-weight:900;transition:.25s;box-shadow:0 7px 25px rgba(137,112,255,.18)}
+.download:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(137,112,255,.35)}
+.hero-content{width:min(850px,calc(100% - 36px));margin:auto;text-align:center;padding:75px 0 110px;animation:heroIn .9s cubic-bezier(.2,.75,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.emblem{width:86px;height:86px;margin:0 auto 22px;display:grid;place-items:center;font-size:67px;line-height:1;color:#fff;filter:drop-shadow(0 8px 22px rgba(0,0,0,.3));animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
+h1{font-family:'Russo One',Impact,sans-serif;text-transform:uppercase;font-size:clamp(42px,7.3vw,82px);line-height:.99;letter-spacing:-.035em;margin:0 auto 28px;text-shadow:0 5px 18px rgba(0,0,0,.2)}
+h1 span{display:block;color:var(--purple)}
+.intro{max-width:690px;margin:0 auto;color:#eeebf2;font-size:clamp(15px,1.35vw,19px);line-height:1.75;text-shadow:0 2px 9px rgba(0,0,0,.45)}
+.play{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:29px;padding:16px 34px;background:var(--yellow);color:#171516;font-family:'Russo One',sans-serif;font-size:23px;text-transform:uppercase;box-shadow:0 9px 28px rgba(0,0,0,.2);clip-path:polygon(1% 2%,99% 0,100% 100%,0 98%);transition:transform .2s,filter .2s}
+.play:hover{transform:translateY(-4px) scale(1.025);filter:brightness(1.06)}
+.play:active{transform:translateY(1px) scale(.99)}
+.scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+main{background:linear-gradient(180deg,#111016,#17131f 100%);transition:background .35s}
+body.light main{background:linear-gradient(180deg,#f0edf5,#e7e0f0)}
+.container{width:min(1080px,calc(100% - 42px));margin:auto}
+section.content-section{padding:88px 0}
+.kicker{font-size:11px;font-weight:1000;letter-spacing:.19em;color:var(--purple);text-transform:uppercase}
+h2{font-family:'Russo One',sans-serif;font-size:clamp(30px,4vw,43px);margin:12px 0 12px;text-transform:uppercase}
+.section-lead{color:var(--muted);line-height:1.8;max-width:650px;margin:0 0 32px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{padding:25px;border:1px solid var(--line);background:var(--panel);border-radius:15px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px);border-color:rgba(169,154,255,.55);box-shadow:0 15px 35px rgba(0,0,0,.15)}
+.card .num{font-family:'Russo One';font-size:13px;color:var(--purple)}
+.card h3{font-family:'Russo One';font-size:18px;margin:17px 0 9px}
+.card p,.news p{color:var(--muted);font-size:14px;line-height:1.75;margin:0}
+.news-item{display:flex;justify-content:space-between;gap:25px;padding:24px 0;border-top:1px solid var(--line)}
+.news-label{font-size:10px;font-weight:1000;letter-spacing:.15em;color:var(--purple)}
+.news h3{font-family:'Russo One';font-size:19px;margin:9px 0}
+.date{color:var(--muted);font-size:12px;white-space:nowrap}
+.discord-box{padding:38px;border:1px solid rgba(169,154,255,.35);border-radius:18px;background:linear-gradient(110deg,rgba(111,86,170,.18),var(--panel));display:flex;align-items:center;justify-content:space-between;gap:25px}
+.discord-box p{max-width:590px;color:var(--muted);line-height:1.8}
+.discord-btn{background:#afa0ff;color:#171323;padding:14px 23px;border-radius:30px;font-weight:1000;white-space:nowrap;transition:.2s}
+.discord-btn:hover{transform:translateY(-3px);box-shadow:0 9px 25px rgba(137,112,255,.22)}
+.notice{font-size:12px;color:var(--muted);margin-top:10px;min-height:18px}
+.about-layout{display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}
+.about-layout p{color:var(--muted);line-height:1.9}
+.quote{font-family:'Russo One';font-size:23px;line-height:1.5;padding:28px;border-left:4px solid var(--purple);background:var(--panel);border-radius:0 15px 15px 0}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s,transform .65s}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:800px){
+ header{height:auto;min-height:65px;flex-wrap:wrap;padding:12px 18px}
+ nav{order:3;display:none;width:100%;flex-direction:column;gap:0;padding:8px 0}
+ nav.open{display:flex}
+ nav a{width:100%;padding:11px;text-align:center}
+ .header-right{margin-left:auto}.download{padding:9px 14px}
+ .hero-content{padding:80px 0 100px}.emblem{font-size:56px;height:65px}
+ .cards{grid-template-columns:1fr}.discord-box{align-items:flex-start;flex-direction:column;padding:26px}
+ .about-layout{grid-template-columns:1fr}.news-item{flex-direction:column;gap:8px}
+ .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="hero" id="home">
+  <header>
+    <a class="logo" href="#home"><span class="logo-mark">M</span><span>MINT FN</span></a>
+    <nav id="nav">
+      <a href="#home">Главная</a>
+      <a href="#start">Как начать играть</a>
+      <a href="#news">Новости</a>
+      <a href="#about">О проекте</a>
+      <a href="#discord">Discord</a>
+    </nav>
+    <div class="header-right">
+      <button class="theme" id="theme" aria-label="Переключить тему" title="Переключить тему">☾</button>
+      <a class="download" href="#start">↓ &nbsp; Launcher</a>
+      <button class="theme" id="menu" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+  <div class="hero-content">
+    <div class="emblem" aria-hidden="true">✦</div>
+    <h1>RETURN TO<span>CHAPTER 3</span></h1>
+    <p class="intro">MINT FN — проект по возвращению атмосферы третьей главы Fortnite. Знакомая карта, любимые места и те самые эмоции старого Fortnite.</p>
+    <a class="play" href="#start">▶ &nbsp; PLAY NOW</a>
+  </div>
+  <div class="scroll-hint">SCROLL TO EXPLORE ↓</div>
+</div>
+<main>
+  <div class="container">
+    <section class="content-section" id="start">
+      <div class="reveal">
+        <div class="kicker">GET STARTED</div><h2>Как начать играть</h2>
+        <p class="section-lead">Мы готовим всё необходимое для запуска MINT FN. Инструкция и ссылки появятся здесь, когда лаунчер будет готов.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal"><div class="num">01 / NEWS</div><h3>Следи за новостями</h3><p>Вступай в Discord и узнавай первым о ходе разработки и дате запуска.</p></article>
+        <article class="card reveal"><div class="num">02 / INSTALL</div><h3>Установи лаунчер</h3><p>Здесь появится официальная ссылка на MINT FN Launcher и инструкция по установке.</p></article>
+        <article class="card reveal"><div class="num">03 / PLAY</div><h3>Возвращайся в игру</h3><p>После подготовки клиента следуй инструкции и подключайся к проекту.</p></article>
+      </div>
+    </section>
+    <section class="content-section news" id="news">
+      <div class="reveal"><div class="kicker">LATEST UPDATES</div><h2>Новости проекта</h2><p class="section-lead">Важные события и обновления MINT FN.</p></div>
+      <article class="news-item reveal"><div><div class="news-label">В РАЗРАБОТКЕ</div><h3>Создание проекта MINT FN</h3><p>Работа над проектом продолжается. Скоро расскажем больше о возможностях и запуске.</p></div><div class="date">СКОРО</div></article>
+      <article class="news-item reveal"><div><div class="news-label">СООБЩЕСТВО</div><h3>Discord MINT FN</h3><p>Следи за анонсами и будь в курсе новостей проекта.</p></div><div class="date">СКОРО</div></article>
+    </section>
+    <section class="content-section" id="discord">
+      <div class="discord-box reveal">
+        <div><div class="kicker">JOIN THE COMMUNITY</div><h2>Наш Discord</h2><p>Общение, новости проекта и помощь игрокам — всё будет в нашем Discord-сообществе.</p><div class="notice" id="discordNotice" aria-live="polite"></div></div>
+        <a class="discord-btn" href="#" id="discordLink">ПЕРЕЙТИ В DISCORD ↗</a>
+      </div>
+    </section>
+    <section class="content-section" id="about">
+      <div class="about-layout">
+        <div class="reveal"><div class="kicker">ABOUT MINT FN</div><h2>О проекте</h2><p>MINT FN — фанатский проект, посвящённый Fortnite Chapter 3. Мы хотим собрать игроков, которым близка атмосфера этой главы, и дать им возможность снова окунуться в знакомый игровой мир.</p><p>MINT FN не связан с Epic Games. Fortnite и все связанные материалы принадлежат их правообладателям.</p></div>
+        <div class="quote reveal">«Вернёмся туда, где всё только начиналось»</div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer><div class="container footer-inner"><a class="logo" href="#home"><span class="logo-mark">M</span>MINT FN</a><span>Fan project · Not affiliated with Epic Games</span><span>© <span id="year"></span> MINT FN</span></div></footer>
+<script>
+  // Вставь Discord-приглашение между кавычками, когда оно будет готово.
+  const DISCORD_URL = "";
+  const discordLink = document.getElementById("discordLink");
+  const discordNotice = document.getElementById("discordNotice");
+  discordLink.addEventListener("click", event => {
+    event.preventDefault();
+    if (DISCORD_URL.trim()) window.open(DISCORD_URL, "_blank", "noopener,noreferrer");
+    else discordNotice.textContent = "Ссылка на Discord скоро появится.";
+  });
+
+  const themeButton = document.getElementById("theme");
+  if (localStorage.getItem("mintfn-theme") === "light") document.body.classList.add("light");
+  function syncTheme(){themeButton.textContent=document.body.classList.contains("light")?"☀":"☾";}
+  syncTheme();
+  themeButton.addEventListener("click",()=>{
+    document.body.classList.toggle("light");
+    localStorage.setItem("mintfn-theme",document.body.classList.contains("light")?"light":"dark");
+    syncTheme();
+  });
+  document.getElementById("menu").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));
+  document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>document.getElementById("nav").classList.remove("open")));
+  document.getElementById("year").textContent=new Date().getFullYear();
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("show");observer.unobserve(entry.target);}}),{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
