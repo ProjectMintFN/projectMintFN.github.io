@@ -1,4 +1,4 @@
-## Hi there 👋
+## Its Fortnite Project CHAPTER 3
 
 <!--
 **ProjectMintFN/ProjectMintFN** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
